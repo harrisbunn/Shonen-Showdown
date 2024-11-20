@@ -4,7 +4,7 @@ import { Team, Character } from '../../models/index.js';
 const router = Router();
 
 
-// create team with name and userId
+// create team with name and userId (/api/team)
 router.post('/', async (req: Request, res: Response) => {
     try {
         const team = await Team.create({
@@ -17,8 +17,22 @@ router.post('/', async (req: Request, res: Response) => {
     }
 });
 
+// get all characters (/api/team/:teamid/characters)
+router.get('/:teamid/characters', async (_req: Request, res: Response) => {
+    try {
+        const characters = await Character.findAll();
+        if (!characters) {
+          throw new Error('characters not found');
+        }
+        console.log(`Successfully got all characters.`);
+        res.status(201).json(characters);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 
-// delete team by ID
+
+// delete team by ID (/api/team/:teamId)
 router.delete('/:teamId', async (req: Request, res: Response) => {
     try {
         const team = await Team.findByPk(req.params.teamId);
@@ -35,8 +49,8 @@ router.delete('/:teamId', async (req: Request, res: Response) => {
 });
 
 
-// add character to team
-router.post('/:teamId/characters', async (req: Request, res: Response) => {
+// add character to team  (/api/team/:teamId/characters/add)
+router.post('/:teamId/characters/add', async (req: Request, res: Response) => {
     try {
         // Find team by ID
         const team = await Team.findByPk(req.params.teamId);
@@ -67,7 +81,7 @@ router.post('/:teamId/characters', async (req: Request, res: Response) => {
 });
 
 
-// get all teams or get teams associated to userId
+// get all teams or get teams associated to userId (/api/team)
 router.get('/?userId', async (req: Request, res: Response) => {
     try {
         if (!req.params.userId) {
@@ -84,7 +98,7 @@ router.get('/?userId', async (req: Request, res: Response) => {
 });
 
 
-// get team by ID
+// get team by ID (/api/team/:teamId)
 router.get('/:teamId', async (req: Request, res: Response) => {
     try {
         const team = await Team.findByPk(req.params.teamId);

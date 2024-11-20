@@ -18,6 +18,20 @@ const getTeamCharacters = async (teamId: string) => {
     });
 };
 
+// get all characters on team (GET /api/battle/:teamid/characters)
+router.get('/:teamid/characters', async (req: Request, res: Response) => {
+    try {
+        const characters = await getTeamCharacters(req.params.teamid);
+        if (!characters) {
+            throw new Error('characters not found');
+        }
+        console.log(`Successfully got characters on the team.`);
+        res.status(201).json(characters);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 
 // simulate battle between two teams
 const simulateBattle = async (team1: CharacterInstance[], team2: CharacterInstance[], team1Points: number, team2Points: number) => {
