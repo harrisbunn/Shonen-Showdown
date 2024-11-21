@@ -55,7 +55,7 @@ const Login = () => {
                     <input type="password" placeholder='Password' id="loginPassword" name="loginPassword" />
                     <input type="button" value="Submit" id="loginSubmit" onClick={async () => {
                         const token = await loginUser();
-                        if (token !== null) {
+                        if (token) {
                             setLoginToken(token);
                             window.location.href = '/';
                         } else {
