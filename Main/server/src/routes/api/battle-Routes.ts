@@ -77,8 +77,8 @@ router.post('/battling', async (req: Request, res: Response) => {
 
         const { result, team1Points, team2Points } = await simulateBattle(team1characters, team2characters, t1points, t2points);
 
-        const team1User = await User.findOne({ where: { id: team1Id.userId } });
-        const team2User = await User.findOne({ where: { id: team2Id.userId } });
+        const team1User = await User.findOne({ where: { id: team1Id } });
+        const team2User = await User.findOne({ where: { id: team2Id } });
 
         if (team1User && team2User) {
             // Update the win/loss/tie records based on the result
@@ -98,6 +98,7 @@ router.post('/battling', async (req: Request, res: Response) => {
         return res.status(200).json({
             team1Points: team1Points,
             team2Points: team2Points,
+            result: result,
         });
     } catch (err) {
         console.error(err);

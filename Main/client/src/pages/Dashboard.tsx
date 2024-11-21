@@ -3,24 +3,41 @@
 }*/
 
 import { useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { UserScoreData } from '../interfaces/UserScoreData';
+import { UserData } from '../interfaces/UserData';
+
+////////////////////////////////////////////
+//-----------Get User Scores--------------//
+////////////////////////////////////////////
+/*const getUserScores = async (userId: number): Promise<UserScoreData | null> => {
+    const response = await fetch(`/api/${userId}/scores`);
+    
+    if (response.status === 200) {
+        const scores = await response.json();
+        return scores;
+    } else {
+        return null;
+    }
+}*/
 
 const Dashboard = () => {
 
-    const { loginToken } = useOutletContext<{
+    const { loginToken, userData } = useOutletContext<{
         loginToken: string | null,
         setLoginToken: (loginToken: string | null) => void
+        userData: UserData | null,
+        setUserData: (userData: UserData | null) => void
     }>();
 
-    //const loginToken = localStorage.getItem('LOGIN_TOKEN');
+    /*let userScore:UserScoreData;
+    if (userData) {userScore = getUserScores(userData.id);}*/
 
-    console.log(loginToken);
-
-
-    const user = {
-        name: "User Name",
+    const userScore:UserScoreData = {
         wins: 10,
         losses: 5,
-        draws: 2,
+        ties: 2,
         gamesPlayed: 17,
         winRate: 58.8,
         curWinStreak: 3,
@@ -56,19 +73,19 @@ const Dashboard = () => {
                 <div id="battleDash">
                     <h1 id="dashTitle" className="dashTitle">Battle Dash</h1>
                     <div id="dashUser">
-                        <h3 id="dashWelcomeMsg" className="dashWelcomeMsg">Welcome {user.name}</h3>
+                        <h3 id="dashWelcomeMsg" className="dashWelcomeMsg">Welcome {userData ? userData.userName : 'Guest'}</h3>
                         <div id="dashStats" className="dashStats">
                             <section id="dashStatsLeft" className="dashStatsLeft">
-                                <p id="dashWins">Wins: {user.wins}</p>
-                                <p id="dashLosses">Losses: {user.losses}</p>
-                                <p id="dashDraws">Draws: {user.draws}</p>
-                                <p id="dashGamesPlayed">Games Played: {user.gamesPlayed}</p>
+                                <p id="dashWins">Wins: {userScore.wins}</p>
+                                <p id="dashLosses">Losses: {userScore.losses}</p>
+                                <p id="dashDraws">Draws: {userScore.ties}</p>
+                                <p id="dashGamesPlayed">Games Played: {userScore.gamesPlayed}</p>
                             </section>
                             <section id="dashStatsRight">
-                                <p id="dashWinRate">Win Rate: {user.winRate}</p>
-                                <p id="dashCurWinStreak">Current Win Streak: {user.curWinStreak}</p>
-                                <p id="dashBigWinStreak">Biggest Win Streak: {user.bigWinStreak}</p>
-                                <p id="dashBigLoseStreak">Biggest Losing Streak: {user.bigLoseStreak}</p>
+                                <p id="dashWinRate">Win Rate: {userScore.winRate}</p>
+                                <p id="dashCurWinStreak">Current Win Streak: {userScore.curWinStreak}</p>
+                                <p id="dashBigWinStreak">Biggest Win Streak: {userScore.bigWinStreak}</p>
+                                <p id="dashBigLoseStreak">Biggest Losing Streak: {userScore.bigLoseStreak}</p>
                             </section>
                         </div>
                     </div>
@@ -87,9 +104,14 @@ const Dashboard = () => {
                 <div id="battleDash">
                     <h1 id="dashTitle">Battle Dash</h1>
                     <div id="dashUser">
-                        <h3 id="dashWelcomeMsg">Welcome! Please <a href="/login">Login</a> or <a href="/signUp">Create</a> an account!</h3>
-                        <a href="/signUp">Create Account</a>
-                        <a href="/login">Login</a>
+                        <h3 id="dashWelcomeMsg">Welcome! Please 
+                            <Link to="/login" aria-label="Go to Login Page">Login</Link> 
+                            or 
+                            <Link to="/signUp" aria-label="Go to Sign Up Page">Create</Link> 
+                            an account!
+                        </h3>
+                        <Link to="/login" aria-label="Go to Login Page">Login</Link>
+                        <Link to="/signUp" aria-label="Go to Sign Up Page">Create Account</Link>
                     </div>
                     {/*}
                     <div id="dashHiScores">

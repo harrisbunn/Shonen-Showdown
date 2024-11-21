@@ -212,6 +212,12 @@
   margin: 0 auto;
 }
 
+#battleVSContainerSpan {
+  color: gold;
+  font-size: 2em;
+  text-shadow: 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black, -1px -1px 0 black;
+}
+
 #battleVSContainer {
   display: flex;
   flex-direction: column;
@@ -223,6 +229,7 @@
   color: red;
   font-style: italic;
   text-shadow: 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black, -1px -1px 0 black;
+  text-align: center;
 }
 
 .teamDisplayNoStats {
