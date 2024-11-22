@@ -1,23 +1,26 @@
+///////////////////////////////////////////////////////
+//------------------Sign Up Page---------------------//
+///////////////////////////////////////////////////////
 const signUp = () => {
-    const username = document.getElementById("signUpUsername") as HTMLInputElement;
-    const password = document.getElementById("signUpPassword") as HTMLInputElement;
-    const confirm = document.getElementById("signUpConfirm") as HTMLInputElement;
+    const usernameInput = document.getElementById("signUpUsername") as HTMLInputElement;
+    const passwordInput = document.getElementById("signUpPassword") as HTMLInputElement;
+    const confirmInput = document.getElementById("signUpConfirm") as HTMLInputElement;
 
     const usernameSpan = document.getElementById("signUpUsernameSpan") as HTMLSpanElement;
     const passwordSpan = document.getElementById("signUpPasswordSpan") as HTMLSpanElement;
-    const confirmSpan = document.getElementById("signUpConfirm") as HTMLSpanElement;
+    const confirmSpan = document.getElementById("signUpConfirmSpan") as HTMLSpanElement;
 
-    if (!username.value || !password.value || !confirm.value) {
-        if (!username.value) { usernameSpan.innerHTML = "Please enter a username"; } else { usernameSpan.innerHTML = ""; }
-        if (!password.value) { passwordSpan.innerHTML = "Please enter a password"; } else { passwordSpan.innerHTML = ""; }
-        if (!confirm.value) { confirmSpan.innerHTML = "Please confirm your password"; } else { confirmSpan.innerHTML = ""; }
+    if (!usernameInput.value || !passwordInput.value || !confirmInput.value) {
+        if (!usernameInput.value) { usernameSpan.innerHTML = "Please enter a username"; } else { usernameSpan.innerHTML = ""; }
+        if (!passwordInput.value) { passwordSpan.innerHTML = "Please enter a password"; } else { passwordSpan.innerHTML = ""; }
+        if (!confirmInput.value) { confirmSpan.innerHTML = "Please confirm your password"; } else { confirmSpan.innerHTML = ""; }
         return;
     } else {
         usernameSpan.innerHTML = "";
         passwordSpan.innerHTML = "";
         confirmSpan.innerHTML = "";
     }
-    if (password.value !== confirm.value) {
+    if (passwordInput.value !== confirmInput.value) {
         confirmSpan.innerHTML = "Passwords do not match";
         return;
     } else {
@@ -30,11 +33,11 @@ const signUp = () => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            username: username.value,
+            username: usernameInput.value,
             win: 0,
             loss: 0,
             tie: 0,
-            password: password.value
+            password: passwordInput.value
         })
     }).then(response => {
         if (response.status === 200) {
