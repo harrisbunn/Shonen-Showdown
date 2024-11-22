@@ -1,7 +1,9 @@
 # Anime Team Builder  
 
 Anime Team Builder is a web application where users can assemble a team of anime characters and engage them in battles. 
-The project leverages modern web development tools and is designed for seamless deployment on Render.  
+The project leverages modern web development tools and is designed for seamless deployment on Render.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features  
 - **Character Selection**: Choose your favorite anime characters to form your team.  
@@ -51,3 +53,8 @@ The app is deployed on Render. To deploy your version:
 
 ### Contributing
 Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request.
+
+## License
+
+This project is licensed under the [MIT](https://opensource.org/licenses/MIT) license.
+[MIT](https://opensource.org/licenses/MIT)
