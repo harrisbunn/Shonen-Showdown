@@ -37,7 +37,8 @@ router.get('/characters', async (_req: Request, res: Response) => {
 // delete team by ID (/api/team/:teamId)
 router.delete('/:teamId', async (req: Request, res: Response) => {
     try {
-        const team = await Team.findByPk(req.params.teamId);
+        const { teamId } = req.params;
+        const team = await Team.findByPk(teamId);
         if (!team) {
           throw new Error('Team not found');
         }
@@ -51,14 +52,15 @@ router.delete('/:teamId', async (req: Request, res: Response) => {
 });
 
 // delete character by ID (/api/team/character/:characterId)
-router.delete('/character/:characterId', async (req: Request, res: Response) => {
+router.delete('/team:/:characterId', async (req: Request, res: Response) => {
     try {
-        const character = await Character.findByPk(req.params.characterId);
+        //const { teamId } = req.params;
+        const { characterId } = req.params;
+        const character = await Character.destroy({ where: { id: characterId } });
         if (!character) {
           throw new Error('Character not found');
         }
         // delete character
-        await character.destroy();
         console.log(`Successfully deleted character with ID ${req.body.characterId}.`);
         res.status(201).json(character);
     } catch (err) {
