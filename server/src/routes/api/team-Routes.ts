@@ -105,7 +105,7 @@ router.post('/:teamId/character/:characterId', async (req: Request, res: Respons
 // get all teams or get teams associated to userId (/api/team)
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const userId = req.query.userId as string | undefined;
+        const userId = req.query.userId as string;
         if (!userId) {
             const teams = await Team.findAll();
             return res.status(200).json(teams);
