@@ -80,7 +80,7 @@ const addTeam = async (userId:number) => {
             },
             body: JSON.stringify({
                 name: teamNameInput.value,
-                userId: userId
+                userId: userId.toString()
             })
         });
 
