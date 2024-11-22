@@ -8,6 +8,7 @@ const router = Router();
 router.post('/', async (req: Request, res: Response) => {
     try {
         const team = await Team.create({
+        id: req.body.id,
         name: req.body.name,
         userId: req.body.userId
         });
